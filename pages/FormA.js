@@ -2,13 +2,28 @@
 import { useState } from 'react';
 
 function FormA({ onSubmit, age }) {
-  const handleSubmit = (event) => {};
+  const [dcShows, setDcShows] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit({
+      type: 'Form A',
+      age: age,
+      dcShows: dcShows,
+      marvelShows: null,
+    });
+  };
+
+  const handleChange = (event) => {
+    setDcShows(event.target.value);
+  };
+
   return (
     <form id='dc' onSubmit={handleSubmit}>
       <h2>Form A</h2>
       <label>
         Select DC Shows:
-        <select>
+        <select value={dcShows} onChange={handleChange}>
           <option value=''>--Select--</option>
           <option value='The Flash'>The Flash</option>
           <option value='Arrow'>Arrow</option>
